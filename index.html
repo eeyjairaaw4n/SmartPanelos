@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Login Terbatas</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 { color: #333; margin-bottom: 10px; }
+        p { color: #777; margin-bottom: 30px; font-size: 0.9rem; }
+
+        .input-group { margin-bottom: 20px; position: relative; }
+        
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus { border-color: #764ba2; box-shadow: 0 0 8px rgba(118, 75, 162, 0.2); }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #764ba2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover { background: #5a397a; transform: translateY(-2px); }
+
+        #error-msg {
+            color: #ff4d4d;
+            margin-top: 15px;
+            font-size: 0.85rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <h2>Selamat Datang</h2>
+        <p>Akses Khusus 6 Anggota Terdaftar</p>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <button type="submit">Login Sekarang</button>
+            <p id="error-msg">Username atau Password salah!</p>
+        </form>g
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            const error = document.getElementById('error-msg');
+
+            // Data 6 Pengguna (Username : Password)
+            const validUsers = {
+                "budi": "12345",
+                "ani": "adminani",
+                "rinto": "rinto99",
+                "santi": "santioke",
+                "eko": "ekopass",
+                "dewi": "dewi123"
+            };
+
+            if (validUsers[user] && validUsers[user] === pass) {
+                // Simpan nama user ke local storage agar bisa dipanggil di dashboard
+                localStorage.setItem("currentUser", user);
+                window.location.href = "dashboard.html";
+            } else {
+                error.style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>
