@@ -3,198 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPanel OS - Dashboard</title>
-    <!-- Pakai Bootstrap biar cepet rapi -->
-    <link href="https://cdn.jsdelivr.net" rel="stylesheet">
+    <title>SmartPanel OS - Integrated System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .sidebar { width: 250px; height: 100vh; position: fixed; background: #2c3e50; color: white; padding-top: 20px; }
-        .sidebar a { color: #bdc3c7; text-decoration: none; display: block; padding: 12px 20px; }
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+        .sidebar { width: 260px; height: 100vh; position: fixed; background: #2c3e50; color: white; transition: all 0.3s; z-index: 100; }
+        .sidebar a { color: #bdc3c7; text-decoration: none; display: block; padding: 15px 25px; border-left: 4px solid transparent; cursor: pointer; }
         .sidebar a:hover, .sidebar a.active { background: #34495e; color: white; border-left: 4px solid #3498db; }
-        .main-content { margin-left: 250px; padding: 20px; }
-        .card-stat { border: none; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .logout-btn { position: absolute; bottom: 20px; width: 100%; color: #e74c3c !important; }
-        .inbox-item { border-bottom: 1px solid #eee; padding: 10px; cursor: pointer; }
-        .inbox-item:hover { background: #f9f9f9; }
-        .label-audit { background: #f1c40f; color: black; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; }
+        .main-content { margin-left: 260px; padding: 30px; min-height: 100vh; }
+        .card-stat { border: none; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s; }
+        .card-stat:hover { transform: translateY(-5px); }
+        .logout-btn { position: absolute; bottom: 30px; width: 100%; color: #e74c3c !important; font-weight: bold; }
+        .page-content { display: none; }
+        .active-page { display: block; }
+        .report-item { border-bottom: 1px solid #eee; padding: 15px; cursor: pointer; transition: 0.2s; }
+        .report-item:hover { background: #f8f9fa; border-left: 3px solid #3498db; }
+        .badge-urgent { background: #e74c3c; font-size: 0.7rem; color: white; padding: 3px 8px; border-radius: 4px; }
+        #user-display { text-transform: capitalize; color: #3498db; }
     </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
 <div class="sidebar">
-    <h4 class="text-center mb-4">SmartPanel <span style="color: #3498db;">OS</span></h4>
-    <a href="#" class="active">🏠 Dashboard</a>
-    <a href="#">📁 Project Registry</a>
-    <a href="#">📅 Production Plan</a>
-    <a href="#">🛠️ Shopfloor Control</a>
-    <a href="#">⚖️ Financial Audit</a>
-    <hr>
-    <a href="#">📊 Navi Report</a>
-    <a href="#" class="logout-btn">🚪 Logout</a>
+    <div class="p-4 text-center">
+        <h4 class="fw-bold">SmartPanel <span style="color: #3498db;">OS</span></h4>
+        <small class="text-muted">User: <span id="user-display"></span></small>
+    </div>
+    <a onclick="showPage('dashboard')" id="nav-dashboard" class="active">🏠 Dashboard</a>
+    <a onclick="showPage('project')" id="nav-project">📁 Project Registry</a>
+    <a onclick="showPage('shopfloor')" id="nav-shopfloor">🛠️ Shopfloor Control</a>
+    <a onclick="showPage('audit')" id="nav-audit">⚖️ Financial Audit</a>
+    <hr class="mx-3 opacity-25">
+    <a onclick="showPage('report')" id="nav-report">📊 Navi Report</a>
+    <a href="#" onclick="logoutSistem()" class="logout-btn">🚪 Logout</a>
 </div>
 
-<!-- MAIN CONTENT -->
 <div class="main-content">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Dashboard Utama</h2>
-        <div class="text-muted">Login: <strong>Accounting Admin</strong></div>
-    </div>
-
-    <!-- STATS CARDS -->
-    <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card card-stat p-3 bg-white text-center">
-                <h6 class="text-muted">Proyek Aktif</h6>
-                <h3>12</h3>
-            </div>
+    <div id="page-dashboard" class="page-content active-page">
+        <h2 class="mb-4">Dashboard Utama</h2>
+        <div class="row g-4 mb-5">
+            <div class="col-md-3"><div class="card card-stat p-3 bg-white text-center"><h6 class="text-muted">Proyek Aktif</h6><h2 class="fw-bold text-primary">12</h2></div></div>
+            <div class="col-md-3"><div class="card card-stat p-3 bg-white text-center"><h6 class="text-muted">Antrean Rakit</h6><h2 class="fw-bold text-info">5</h2></div></div>
+            <div class="col-md-3"><div class="card card-stat p-3 bg-warning text-dark text-center"><h6 class="fw-bold">Menunggu Audit</h6><h2 class="fw-bold">3</h2></div></div>
+            <div class="col-md-3"><div class="card card-stat p-3 bg-success text-white text-center"><h6>Siap Kirim</h6><h2 class="fw-bold">2</h2></div></div>
         </div>
-        <div class="col-md-3">
-            <div class="card card-stat p-3 bg-white text-center">
-                <h6 class="text-muted">Antrean Rakit</h6>
-                <h3>5</h3>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card card-stat p-3 bg-warning text-dark text-center">
-                <h6 class="fw-bold">Menunggu Audit</h6>
-                <h3>3</h3>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card card-stat p-3 bg-success text-white text-center">
-                <h6>Siap Kirim</h6>
-                <h3>2</h3>
-            </div>
+        <div class="card card-stat p-4">
+            <h5>Aktivitas Terakhir</h5>
+            <p class="text-muted">Selamat datang kembali. Sistem memantau 5 departemen secara real-time.</p>
         </div>
     </div>
 
-    <!-- INBOX NAVI REPORT (Gmail Style) -->
-    <div class="card card-stat p-4">
-        <h5 class="mb-3">Navi Report - Inbox Laporan</h5>
-        <div class="inbox-item d-flex justify-content-between">
-            <div>
-                <strong>[Audit]</strong> Selisih Material Proyek PLN-Jabar <span class="label-audit">Urgent</span>
-            </div>
-            <div class="text-muted small">12:30 PM</div>
-        </div>
-        <div class="inbox-item d-flex justify-content-between">
-            <div>
-                <strong>[Shopfloor]</strong> Uji Hipot Selesai - Panel LVMDP Project A
-            </div>
-            <div class="text-muted small">09:15 AM</div>
-        </div>
-        <div class="inbox-item d-flex justify-content-between">
-            <div>
-                <strong>[Sales]</strong> PO Baru Masuk: PT. Maju Jaya (2 Unit)
-            </div>
-            <div class="text-muted small">Yesterday</div>
-        </div>
-        <div class="text-center mt-3">
-            <a href="#" class="btn btn-sm btn-outline-primary">Lihat Semua Laporan</a>
-        </div>
-    </div>
-</div>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPanel OS - Dashboard</title>
-    <!-- Pakai Bootstrap biar cepet rapi -->
-    <link href="https://cdn.jsdelivr.net" rel="stylesheet">
-    <style>
-        body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .sidebar { width: 250px; height: 100vh; position: fixed; background: #2c3e50; color: white; padding-top: 20px; }
-        .sidebar a { color: #bdc3c7; text-decoration: none; display: block; padding: 12px 20px; }
-        .sidebar a:hover, .sidebar a.active { background: #34495e; color: white; border-left: 4px solid #3498db; }
-        .main-content { margin-left: 250px; padding: 20px; }
-        .card-stat { border: none; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .logout-btn { position: absolute; bottom: 20px; width: 100%; color: #e74c3c !important; }
-        .inbox-item { border-bottom: 1px solid #eee; padding: 10px; cursor: pointer; }
-        .inbox-item:hover { background: #f9f9f9; }
-        .label-audit { background: #f1c40f; color: black; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; }
-    </style>
-</head>
-<body>
-
-<!-- SIDEBAR -->
-<div class="sidebar">
-    <h4 class="text-center mb-4">SmartPanel <span style="color: #3498db;">OS</span></h4>
-    <a href="#" class="active">🏠 Dashboard</a>
-    <a href="#">📁 Project Registry</a>
-    <a href="#">📅 Production Plan</a>
-    <a href="#">🛠️ Shopfloor Control</a>
-    <a href="#">⚖️ Financial Audit</a>
-    <hr>
-    <a href="#">📊 Navi Report</a>
-    <a href="#" class="logout-btn">🚪 Logout</a>
-</div>
-
-<!-- MAIN CONTENT -->
-<div class="main-content">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Dashboard Utama</h2>
-        <div class="text-muted">Login: <strong>Accounting Admin</strong></div>
-    </div>
-
-    <!-- STATS CARDS -->
-    <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card card-stat p-3 bg-white text-center">
-                <h6 class="text-muted">Proyek Aktif</h6>
-                <h3>12</h3>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card card-stat p-3 bg-white text-center">
-                <h6 class="text-muted">Antrean Rakit</h6>
-                <h3>5</h3>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card card-stat p-3 bg-warning text-dark text-center">
-                <h6 class="fw-bold">Menunggu Audit</h6>
-                <h3>3</h3>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card card-stat p-3 bg-success text-white text-center">
-                <h6>Siap Kirim</h6>
-                <h3>2</h3>
-            </div>
+    <div id="page-project" class="page-content">
+        <h2 class="mb-4">Project Registry</h2>
+        <div class="card card-stat p-4">
+            <label class="form-label">Nomor PO / Nama Pelanggan</label>
+            <input type="text" class="form-control mb-3" placeholder="Masukkan data proyek baru...">
+            <button class="btn btn-primary w-25">Registrasi Proyek</button>
         </div>
     </div>
 
-    <!-- INBOX NAVI REPORT (Gmail Style) -->
-    <div class="card card-stat p-4">
-        <h5 class="mb-3">Navi Report - Inbox Laporan</h5>
-        <div class="inbox-item d-flex justify-content-between">
-            <div>
-                <strong>[Audit]</strong> Selisih Material Proyek PLN-Jabar <span class="label-audit">Urgent</span>
-            </div>
-            <div class="text-muted small">12:30 PM</div>
-        </div>
-        <div class="inbox-item d-flex justify-content-between">
-            <div>
-                <strong>[Shopfloor]</strong> Uji Hipot Selesai - Panel LVMDP Project A
-            </div>
-            <div class="text-muted small">09:15 AM</div>
-        </div>
-        <div class="inbox-item d-flex justify-content-between">
-            <div>
-                <strong>[Sales]</strong> PO Baru Masuk: PT. Maju Jaya (2 Unit)
-            </div>
-            <div class="text-muted small">Yesterday</div>
-        </div>
-        <div class="text-center mt-3">
-            <a href="#" class="btn btn-sm btn-outline-primary">Lihat Semua Laporan</a>
-        </div>
     </div>
-</div>
+
+<script>
+    // Proteksi Halaman
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+        window.location.href = "index.html";
+    }
+    
+    // Tampilkan Nama User
+    document.getElementById("user-display").innerText = localStorage.getItem("userRole");
+
+    function showPage(pageId) {
+        document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active-page'));
+        document.getElementById('page-' + pageId).classList.add('active-page');
+        document.querySelectorAll('.sidebar a').forEach(l => l.classList.remove('active'));
+        document.getElementById('nav-' + pageId).classList.add('active');
+    }
+
+    function logoutSistem() {
+        if(confirm("Apakah anda ingin keluar dari SmartPanel?")) {
+            localStorage.clear();
+            window.location.href = "index.html";
+        }
+    }
+</script>
 
 </body>
 </html>
