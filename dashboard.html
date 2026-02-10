@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartPanel OS - Dashboard</title>
+    <!-- Pakai Bootstrap biar cepet rapi -->
+    <link href="https://cdn.jsdelivr.net" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .sidebar { width: 250px; height: 100vh; position: fixed; background: #2c3e50; color: white; padding-top: 20px; }
+        .sidebar a { color: #bdc3c7; text-decoration: none; display: block; padding: 12px 20px; }
+        .sidebar a:hover, .sidebar a.active { background: #34495e; color: white; border-left: 4px solid #3498db; }
+        .main-content { margin-left: 250px; padding: 20px; }
+        .card-stat { border: none; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .logout-btn { position: absolute; bottom: 20px; width: 100%; color: #e74c3c !important; }
+        .inbox-item { border-bottom: 1px solid #eee; padding: 10px; cursor: pointer; }
+        .inbox-item:hover { background: #f9f9f9; }
+        .label-audit { background: #f1c40f; color: black; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h4 class="text-center mb-4">SmartPanel <span style="color: #3498db;">OS</span></h4>
+    <a href="#" class="active">🏠 Dashboard</a>
+    <a href="#">📁 Project Registry</a>
+    <a href="#">📅 Production Plan</a>
+    <a href="#">🛠️ Shopfloor Control</a>
+    <a href="#">⚖️ Financial Audit</a>
+    <hr>
+    <a href="#">📊 Navi Report</a>
+    <a href="#" class="logout-btn">🚪 Logout</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Dashboard Utama</h2>
+        <div class="text-muted">Login: <strong>Accounting Admin</strong></div>
+    </div>
+
+    <!-- STATS CARDS -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card card-stat p-3 bg-white text-center">
+                <h6 class="text-muted">Proyek Aktif</h6>
+                <h3>12</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-stat p-3 bg-white text-center">
+                <h6 class="text-muted">Antrean Rakit</h6>
+                <h3>5</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-stat p-3 bg-warning text-dark text-center">
+                <h6 class="fw-bold">Menunggu Audit</h6>
+                <h3>3</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-stat p-3 bg-success text-white text-center">
+                <h6>Siap Kirim</h6>
+                <h3>2</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- INBOX NAVI REPORT (Gmail Style) -->
+    <div class="card card-stat p-4">
+        <h5 class="mb-3">Navi Report - Inbox Laporan</h5>
+        <div class="inbox-item d-flex justify-content-between">
+            <div>
+                <strong>[Audit]</strong> Selisih Material Proyek PLN-Jabar <span class="label-audit">Urgent</span>
+            </div>
+            <div class="text-muted small">12:30 PM</div>
+        </div>
+        <div class="inbox-item d-flex justify-content-between">
+            <div>
+                <strong>[Shopfloor]</strong> Uji Hipot Selesai - Panel LVMDP Project A
+            </div>
+            <div class="text-muted small">09:15 AM</div>
+        </div>
+        <div class="inbox-item d-flex justify-content-between">
+            <div>
+                <strong>[Sales]</strong> PO Baru Masuk: PT. Maju Jaya (2 Unit)
+            </div>
+            <div class="text-muted small">Yesterday</div>
+        </div>
+        <div class="text-center mt-3">
+            <a href="#" class="btn btn-sm btn-outline-primary">Lihat Semua Laporan</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartPanel OS - Dashboard</title>
+    <!-- Pakai Bootstrap biar cepet rapi -->
+    <link href="https://cdn.jsdelivr.net" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .sidebar { width: 250px; height: 100vh; position: fixed; background: #2c3e50; color: white; padding-top: 20px; }
+        .sidebar a { color: #bdc3c7; text-decoration: none; display: block; padding: 12px 20px; }
+        .sidebar a:hover, .sidebar a.active { background: #34495e; color: white; border-left: 4px solid #3498db; }
+        .main-content { margin-left: 250px; padding: 20px; }
+        .card-stat { border: none; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .logout-btn { position: absolute; bottom: 20px; width: 100%; color: #e74c3c !important; }
+        .inbox-item { border-bottom: 1px solid #eee; padding: 10px; cursor: pointer; }
+        .inbox-item:hover { background: #f9f9f9; }
+        .label-audit { background: #f1c40f; color: black; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h4 class="text-center mb-4">SmartPanel <span style="color: #3498db;">OS</span></h4>
+    <a href="#" class="active">🏠 Dashboard</a>
+    <a href="#">📁 Project Registry</a>
+    <a href="#">📅 Production Plan</a>
+    <a href="#">🛠️ Shopfloor Control</a>
+    <a href="#">⚖️ Financial Audit</a>
+    <hr>
+    <a href="#">📊 Navi Report</a>
+    <a href="#" class="logout-btn">🚪 Logout</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Dashboard Utama</h2>
+        <div class="text-muted">Login: <strong>Accounting Admin</strong></div>
+    </div>
+
+    <!-- STATS CARDS -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card card-stat p-3 bg-white text-center">
+                <h6 class="text-muted">Proyek Aktif</h6>
+                <h3>12</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-stat p-3 bg-white text-center">
+                <h6 class="text-muted">Antrean Rakit</h6>
+                <h3>5</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-stat p-3 bg-warning text-dark text-center">
+                <h6 class="fw-bold">Menunggu Audit</h6>
+                <h3>3</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-stat p-3 bg-success text-white text-center">
+                <h6>Siap Kirim</h6>
+                <h3>2</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- INBOX NAVI REPORT (Gmail Style) -->
+    <div class="card card-stat p-4">
+        <h5 class="mb-3">Navi Report - Inbox Laporan</h5>
+        <div class="inbox-item d-flex justify-content-between">
+            <div>
+                <strong>[Audit]</strong> Selisih Material Proyek PLN-Jabar <span class="label-audit">Urgent</span>
+            </div>
+            <div class="text-muted small">12:30 PM</div>
+        </div>
+        <div class="inbox-item d-flex justify-content-between">
+            <div>
+                <strong>[Shopfloor]</strong> Uji Hipot Selesai - Panel LVMDP Project A
+            </div>
+            <div class="text-muted small">09:15 AM</div>
+        </div>
+        <div class="inbox-item d-flex justify-content-between">
+            <div>
+                <strong>[Sales]</strong> PO Baru Masuk: PT. Maju Jaya (2 Unit)
+            </div>
+            <div class="text-muted small">Yesterday</div>
+        </div>
+        <div class="text-center mt-3">
+            <a href="#" class="btn btn-sm btn-outline-primary">Lihat Semua Laporan</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
